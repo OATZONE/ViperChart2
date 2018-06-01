@@ -1,0 +1,6 @@
+framework module Pods_ViperCharts {
+  umbrella header "Pods-ViperCharts-umbrella.h"
+
+  export *
+  module * { export * }
+}
