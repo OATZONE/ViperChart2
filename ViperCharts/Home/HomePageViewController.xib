@@ -14,6 +14,8 @@
                 <outlet property="btvalue1" destination="92f-bI-167" id="kVS-aB-22i"/>
                 <outlet property="chartView" destination="hxl-LC-YA4" id="tMI-aR-9Na"/>
                 <outlet property="pieChartView" destination="Rdh-PR-tUG" id="rz9-E2-Hop"/>
+                <outlet property="pieChartView2" destination="dKx-Xh-ZBc" id="lE1-q0-y0J"/>
+                <outlet property="pieChartView3" destination="qjZ-4O-4Vg" id="swo-bR-3fg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -134,6 +136,16 @@
                             <subviews>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rdh-PR-tUG" customClass="PieChartView" customModule="Charts">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="358"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
+                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dKx-Xh-ZBc" customClass="PieChartView" customModule="Charts">
+                                    <rect key="frame" x="8" y="8" width="398" height="341"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
+                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qjZ-4O-4Vg" customClass="PieChartView" customModule="Charts">
+                                    <rect key="frame" x="107" y="79" width="200" height="200"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>

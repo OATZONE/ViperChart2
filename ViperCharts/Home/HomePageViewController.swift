@@ -21,7 +21,8 @@ class HomePageViewController: UIViewController, HomePageViewProtocol,ChartViewDe
                    "Party S", "Party T", "Party U", "Party V", "Party W", "Party X",
                    "Party Y", "Party Z"]
     @IBOutlet weak var pieChartView: PieChartView!
-    
+    @IBOutlet weak var pieChartView2: PieChartView!
+    @IBOutlet weak var pieChartView3: PieChartView!
     @IBOutlet weak var btvalue1: UIButton!
     @IBOutlet weak var chartView: LineChartView!
     var someInts = [Double]()
@@ -31,22 +32,17 @@ class HomePageViewController: UIViewController, HomePageViewProtocol,ChartViewDe
 	override func viewDidLoad() {
         super.viewDidLoad()
         pieChartView.delegate = self
-        pieChartView.entryLabelColor = .white
-        pieChartView.entryLabelFont = .systemFont(ofSize: 12, weight: .light)
-        pieChartView.drawCenterTextEnabled = false
-       // pieChartView.holeColor =  UIColor( red: CGFloat(0/255.0), green: CGFloat(0/255.0), blue: CGFloat(0/255.0), alpha: CGFloat(0.5) )
-       // pieChartView.holeColor = UIColor(white: 2, alpha: 0.7)
-
         pieChartView.holeRadiusPercent = 0
-        pieChartView.transparentCircleRadiusPercent = 0.93
-        pieChartView.transparentCircleColor = UIColor( red: CGFloat(0/255.0), green: CGFloat(0/255.0), blue: CGFloat(0/255.0), alpha: CGFloat(0.7) )
-        pieChartView.tintColor = UIColor.white
-        pieChartView.animate(xAxisDuration: 1.4, easingOption: .easeOutBack)
+        pieChartView.transparentCircleRadiusPercent = 1
         
-     
+        pieChartView2.delegate = self
+        pieChartView2.holeRadiusPercent = 0
+        pieChartView2.transparentCircleRadiusPercent = 1
         
+        pieChartView3.delegate = self
+        pieChartView3.holeRadiusPercent = 0
+        pieChartView3.transparentCircleRadiusPercent = 1
         
-       
         chartView.delegate = self
         chartView.chartDescription?.enabled = false
         chartView.dragEnabled = true
@@ -102,68 +98,77 @@ class HomePageViewController: UIViewController, HomePageViewProtocol,ChartViewDe
         setPieChart()
     }
     func setPieChart (){
-           var lineChartEntry = [PieChartDataEntry]()
-         someInts = [18.123,18.456,18.456,18.567,19.2,19.812,19.293,18.120,19.23,15.42,13.353,19.55]
-        let entries = (0..<6).map { (i) -> PieChartDataEntry in
-            // IMPORTANT: In a PieChart, no values (Entry) should have the same xIndex (even if from different DataSets), since no values can be drawn above each other.
-            
+        let entries = (0..<3).map { (i) -> PieChartDataEntry in
             if (i == 1) {
-                return PieChartDataEntry(value: Double(arc4random_uniform(3) + 3 / 5),
+                return PieChartDataEntry(value: 2,
                                          // label: parties[i % parties.count],
                                          icon: #imageLiteral(resourceName: "v1"))
             }
             if (i == 2) {
-                return PieChartDataEntry(value: Double(arc4random_uniform(3) + 3 / 5),
+                return PieChartDataEntry(value: 2,
                                        //  label: parties[i % parties.count],
                                          icon: #imageLiteral(resourceName: "v2"))
             }else{
-                
-                return PieChartDataEntry(value: Double(arc4random_uniform(3) + 3 / 5),
+                return PieChartDataEntry(value: 6,
                                       //   label: parties[i % parties.count],
                                          icon: #imageLiteral(resourceName: "v3"))
             }
         }
         
+        let entries2 = (0..<3).map { (i) -> PieChartDataEntry in
+            if (i == 1) {
+                return PieChartDataEntry(value: 2, label: "")
+            }
+            if (i == 2) {
+                return PieChartDataEntry(value: 2, label: "")
+            }else{
+                return PieChartDataEntry(value: 6, label: "")
+            }
+        }
+        
+        let entries3 = (0..<3).map { (i) -> PieChartDataEntry in
+            if (i == 1) {
+                return PieChartDataEntry(value: 2, label: "20%")
+            }
+            if (i == 2) {
+                return PieChartDataEntry(value: 2, label: "20%")
+            }else{
+                return PieChartDataEntry(value: 6, label: "60%")
+            }
+        }
+        
         let set = PieChartDataSet(values: entries, label: "Election Results")
+        set.drawValuesEnabled = false
         set.drawIconsEnabled = true
-     
-        set.iconsOffset = CGPoint(x: 0, y: 0)
-    
-        
-        
+        set.iconsOffset = CGPoint(x: 0, y: 32)
         set.sliceSpace = 1
+        set.colors = [UIColor.black.withAlphaComponent(0.4)]
         
-        set.valueLinePart1OffsetPercentage = 100
-        
-        set.colors = ChartColorTemplates.vordiplom()
+        let set2 = PieChartDataSet(values: entries2, label: "Election Results")
+        set2.drawValuesEnabled = false
+        set2.sliceSpace = 1
+        set2.valueLinePart1OffsetPercentage = 100
+        set2.colors = ChartColorTemplates.vordiplom()
             + ChartColorTemplates.joyful()
             + ChartColorTemplates.colorful()
             + ChartColorTemplates.liberty()
             + ChartColorTemplates.pastel()
             + [UIColor(red: 51/255, green: 181/255, blue: 229/255, alpha: 1)]
         
+        let set3 = PieChartDataSet(values: entries3, label: "Election Results")
+        set3.drawValuesEnabled = false
+        set3.sliceSpace = 1
+        set3.colors = [UIColor.black.withAlphaComponent(0.7)]
+        
         let data = PieChartData(dataSet: set)
+        let data2 = PieChartData(dataSet: set2)
+        let data3 = PieChartData(dataSet: set3)
         
-        let pFormatter = NumberFormatter()
-        pFormatter.numberStyle = .percent
-        pFormatter.maximumFractionDigits = 1
-        pFormatter.multiplier = 1
-        pFormatter.percentSymbol = " %"
-        data.setValueFormatter(DefaultValueFormatter(formatter: pFormatter))
-        
-        data.setValueFont(.systemFont(ofSize: 11, weight: .light))
-        data.setValueTextColor(.white)
-        
-        pieChartView.data = data
+        pieChartView.data = data2
+        pieChartView2.data = data
+        pieChartView3.data = data3
         pieChartView.highlightValues(nil)
         pieChartView.backgroundColor =  UIColor(red: 72/255, green: 81/255, blue: 85/255, alpha: 1)
-        for i in 0..<pieChartView.subviews.count {
-            var view = pieChartView.subviews[i] as UIView
-            print(view.description)
-            view.layoutSubviews()
-            
-        }
-        
     }
     func useGeoTest(valueS:  String) -> () {
         var lineChartEntry = [ChartDataEntry]()
