@@ -167,6 +167,9 @@ class HomePageViewController: UIViewController, HomePageViewProtocol,ChartViewDe
         pieChartView.data = data2
         pieChartView2.data = data
         pieChartView3.data = data3
+        pieChartView.isUserInteractionEnabled = false
+        pieChartView2.isUserInteractionEnabled = false
+        pieChartView3.isUserInteractionEnabled = false
         pieChartView.highlightValues(nil)
         pieChartView.backgroundColor =  UIColor(red: 72/255, green: 81/255, blue: 85/255, alpha: 1)
     }
